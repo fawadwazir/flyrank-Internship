@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Refresh Scoring for Content Opportunity — Fawad Wazir</title>
+<style>
+  :root{
+    --ink:#1c1c1e; --sub:#5b5b60; --line:#e3e1db; --paper:#fbfaf7;
+    --accent:#8a3b12; --accent-soft:#f4e9df; --good:#2f6b3e; --bad:#a4342a;
+    --mono: "SF Mono", "Consolas", monospace;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    line-height:1.65; font-size:18px;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:64px 24px 100px;}
+  header.title-block{margin-bottom:56px; border-bottom:1px solid var(--line); padding-bottom:36px;}
+  .kicker{
+    font-family:-apple-system,Helvetica,Arial,sans-serif; text-transform:uppercase;
+    letter-spacing:.12em; font-size:12.5px; color:var(--accent); font-weight:600; margin-bottom:14px;
+  }
+  h1{font-size:2.15em; line-height:1.2; margin:0 0 18px; font-weight:400;}
+  .byline{
+    font-family:-apple-system,Helvetica,Arial,sans-serif; font-size:14.5px; color:var(--sub);
+    display:flex; flex-wrap:wrap; gap:6px 18px;
+  }
+  .byline span b{color:var(--ink); font-weight:600;}
+  h2{
+    font-size:1.05em; text-transform:uppercase; letter-spacing:.08em; font-weight:700;
+    font-family:-apple-system,Helvetica,Arial,sans-serif; color:var(--accent);
+    margin:56px 0 18px; padding-bottom:8px; border-bottom:1px solid var(--line);
+  }
+  h2 .num{color:var(--sub); font-weight:400; margin-right:8px;}
+  h3{font-size:1.15em; font-weight:600; margin:28px 0 10px;}
+  p{margin:0 0 16px;}
+  .abstract{
+    background:var(--accent-soft); border-left:3px solid var(--accent);
+    padding:22px 26px; margin-bottom:8px; font-size:.98em;
+  }
+  .abstract p{margin:0;}
+  code, .mono{font-family:var(--mono); font-size:.86em; background:#eeece5; padding:1px 5px; border-radius:3px;}
+  pre{
+    background:#232323; color:#e8e6df; padding:18px 20px; border-radius:6px;
+    overflow-x:auto; font-family:var(--mono); font-size:.82em; line-height:1.55;
+  }
+  pre code{background:none; padding:0; color:inherit;}
+  table{width:100%; border-collapse:collapse; margin:20px 0 24px; font-size:.92em;
+        font-family:-apple-system,Helvetica,Arial,sans-serif;}
+  th, td{text-align:left; padding:9px 14px; border-bottom:1px solid var(--line);}
+  th{font-weight:700; font-size:.82em; text-transform:uppercase; letter-spacing:.04em; color:var(--sub);}
+  tr:last-child td{border-bottom:2px solid var(--ink);}
+  .win{color:var(--good); font-weight:700;}
+  .callout{
+    border:1px solid var(--line); border-radius:8px; padding:18px 22px; margin:22px 0;
+    background:#fff; font-family:-apple-system,Helvetica,Arial,sans-serif; font-size:.94em;
+  }
+  .callout .label{font-weight:700; color:var(--accent); text-transform:uppercase; font-size:.78em; letter-spacing:.06em; display:block; margin-bottom:6px;}
+  figure{margin:26px 0;}
+  figure img{width:100%; height:auto; border:1px solid var(--line); border-radius:6px; background:#fff;}
+  figcaption{font-family:-apple-system,Helvetica,Arial,sans-serif; font-size:.83em; color:var(--sub); margin-top:8px;}
+  .chart-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  @media (max-width:640px){.chart-grid{grid-template-columns:1fr;}}
+  ol, ul{padding-left:22px;}
+  li{margin-bottom:8px;}
+  a{color:var(--accent);}
+  footer{
+    margin-top:60px; padding-top:26px; border-top:1px solid var(--line);
+    font-family:-apple-system,Helvetica,Arial,sans-serif; font-size:.92em; color:var(--sub);
+  }
+  .credit-box{
+    background:#fff; border:1px solid var(--line); border-radius:8px; padding:18px 22px;
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
+  }
+  .repro-list{font-family:-apple-system,Helvetica,Arial,sans-serif; font-size:.9em;}
+  .badge{
+    display:inline-block; font-family:-apple-system,Helvetica,Arial,sans-serif; font-size:.72em;
+    text-transform:uppercase; letter-spacing:.05em; font-weight:700; padding:2px 8px; border-radius:10px;
+    background:var(--accent-soft); color:var(--accent); margin-left:8px; vertical-align:middle;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="title-block">
+    <div class="kicker">FlyRank ML Internship &middot; Capstone Paper &middot; Lane 2</div>
+    <h1>Which Page Gets Refreshed First? Scoring Content Decline Under an Honest Client-Holdout Split</h1>
+    <div class="byline">
+      <span><b>Fawad Wazir</b></span>
+      <span>BS Artificial Intelligence, University of Science &amp; Technology Bannu</span>
+      <span>September 2026</span>
+      <span><a href="https://github.com/fawadwazir/flyrank-Internship">Repository →</a></span>
+    </div>
+  </header>
+
+  <section class="abstract">
+    <p><b>Abstract.</b> Which of a client's existing pages should an editor refresh first, out
+    of thousands that could plausibly qualify? This paper builds a page-level scoring model on
+    FlyRank's content performance dataset and evaluates it against a transparent three-gate
+    baseline rule (stale + strikable + visible) using a held-out set of clients the model never
+    trained on. On that honest split, a logistic regression scorer roughly doubles the
+    baseline's precision at the top of the queue (Precision@50: 0.34 → 0.74) while a more
+    complex Random Forest does not improve on the simple model — and the Random Forest's
+    apparent 0.92 Precision@50 disappears to 0.56 the moment the split stops leaking client
+    identity, which is itself the paper's central finding. The output is a ranked, reason-coded
+    refresh queue meant to sit in front of a human editor, not to replace one.</p>
+  </section>
+
+  <h2><span class="num">1</span>Introduction &amp; Problem Statement</h2>
+  <p>A content team managing dozens of clients cannot manually review every page every
+  quarter to decide what to refresh. They need a ranked, defensible worklist. The <b>unit of
+  analysis</b> is one page belonging to one client, scored on its trailing 90-day performance.
+  The <b>output</b> is a three-tier queue (<code>refresh_priority</code>,
+  <code>refresh_backlog</code>, <code>no_action</code>) with a short reason code per page. The
+  <b>action</b> a human takes is working the priority tier first. A false positive costs an
+  editor's time; a false negative lets a real opportunity keep losing traffic unnoticed —
+  neither is catastrophic, which is why this is built as a prioritization aid reviewed by a
+  person, not an automated trigger.</p>
+
+  <h2><span class="num">2</span>Data</h2>
+  <p>This paper uses <code>data/raw/content_refresh_anonymized.csv</code> — a 30,000-row,
+  32-client starter slice (52 columns: identifiers, content metadata, 90-day performance
+  metrics, and pre-computed trend/tier fields). All identifiers are pre-anonymized hashes.</p>
+  <p>The internship's data contract scoped a label definition against the full 79M-row
+  <code>FlyRank/internship-warehouse</code> release on Hugging Face. This iteration was built
+  and evaluated on the 30,000-row starter slice — the same slice the baseline was validated on
+  — so baseline and model are compared on identical data. Scaling this exact pipeline to the
+  full warehouse is listed as future work (§8).</p>
+  <p><b>Excluded on purpose:</b> <code>trend_direction</code> / <code>trend_pct</code> (the
+  label, or derived directly from it); the paired 30-day impression/click/session columns the
+  label is computed from; and both ID columns, used only for grouping, never as features.
+  No client name, URL, or query string appears anywhere in this repo.</p>
+
+  <h2><span class="num">3</span>Methodology</h2>
+  <h3>Baseline</h3>
+  <p>A transparent, non-fitted three-gate rule: flag a page only if it is <b>stale</b>
+  (<code>freshness_tier == "91-180"</code>), <b>strikable</b> (<code>position_tier</code> in
+  page_1/striking), and <b>visible</b> (<code>impression_tier</code> in
+  moderate/good/excellent); rank flagged pages by raw <code>impressions_90d</code>.</p>
+  <h3>Target</h3>
+  <p><code>is_declining_label = 1</code> if <code>trend_direction == "down"</code> — a proxy
+  for "this page's traffic is trending down," not a guarantee of a future outcome.</p>
+  <h3>Features</h3>
+  <p>18 numeric (standardized) + 8 categorical (one-hot) = 26 features spanning volume,
+  competition, content shape, visibility consistency, position, and engagement. Full list and
+  exclusions in the repo's <code>work/capstone_report.md</code> §4.</p>
+  <h3>Models &amp; validation design</h3>
+  <p>Logistic Regression and Random Forest, trained and compared on identical features and
+  splits. The primary split is <b>grouped by <code>client_id</code></b>
+  (<code>GroupShuffleSplit</code>, 75/25, seed=42): 24 training clients (22,885 pages) vs.
+  8 held-out test clients (7,115 pages) the model never saw during training. A page-level
+  random split was deliberately rejected as the primary evaluation — see §5.</p>
+  <h3>Leakage checks</h3>
+  <p>An automated assertion in the training script blocks the label column, the label's raw
+  components, and both ID columns from ever entering the feature list. Client-holdout grouping
+  is itself a leakage control: it prevents the model from partly memorizing per-client
+  patterns instead of learning signals that generalize to a new client.</p>
+
+  <h2><span class="num">4</span>Results</h2>
+  <p>Model vs. baseline, same client-holdout test set (7,115 pages, 8 clients), same metrics:</p>
+  <table>
+    <tr><th>Method</th><th>ROC AUC</th><th>Precision@20</th><th>Precision@50</th></tr>
+    <tr><td>Baseline rule (3-gate)</td><td>0.503</td><td>0.20</td><td>0.34</td></tr>
+    <tr><td>Random Forest</td><td>0.603</td><td>0.50</td><td>0.56</td></tr>
+    <tr><td><b>Logistic Regression</b></td><td class="win">0.611</td><td class="win">0.80</td><td class="win">0.74</td></tr>
+  </table>
+  <p>Test-set base rate: 51.7% (train: 55.0%) — close enough that the split isn't skewed.
+  Logistic Regression wins on every metric, roughly doubling the baseline's Precision@50.</p>
+
+  <div class="chart-grid">
+    <figure><img src="charts/precision_at_50_comparison.svg" alt="Precision at 50 comparison chart">
+      <figcaption>Fig. 1 — Precision@50, client-holdout test set.</figcaption></figure>
+    <figure><img src="charts/precision_at_20_comparison.svg" alt="Precision at 20 comparison chart">
+      <figcaption>Fig. 2 — Precision@20, same test set.</figcaption></figure>
+  </div>
+
+  <div class="callout">
+    <span class="label">The split-honesty check</span>
+    The same Random Forest, same features, evaluated on a random 75/25 <i>row</i> split instead
+    of client-holdout, scores <b>ROC AUC 0.753, Precision@50 0.92</b> — a result that looks
+    like a clear win. That gap (0.603 → 0.753 AUC) isn't a better model; it's the model
+    partly recognizing clients it already saw in training. Any Precision@K number quoted on
+    this kind of data without stating the split type should be treated with suspicion.
+  </div>
+  <figure><img src="charts/split_honesty_gap.svg" alt="Split honesty gap chart">
+    <figcaption>Fig. 3 — Same model, same features, two different (honest vs. leaky) splits.</figcaption></figure>
+
+  <h3>What the model found</h3>
+  <p>Top Logistic Regression weights: higher 90-day impressions and a "good" (not
+  "excellent") visibility tier raise flagged risk; a striking-distance position and higher
+  clicks are protective; staleness in the 3–6 month range confirms the baseline's core
+  intuition. Random Forest's top features — visibility <i>consistency</i>
+  (<code>days_with_impressions</code>), content age, and position — tell a consistent story
+  independently.</p>
+  <figure><img src="charts/lr_top_coefficients.svg" alt="Logistic regression top coefficients chart">
+    <figcaption>Fig. 4 — Logistic Regression's largest standardized weights.</figcaption></figure>
+
+  <h3>Error analysis</h3>
+  <p>Of the model's top 50 ranked test pages, 37 (74%) are true declining pages, matching
+  Precision@50 exactly. Two clients account for 35 of the 50 top picks — the same per-client
+  concentration weakness the baseline had (see recommendations, §6). Most of the 13 false
+  positives share a recently-updated freshness tier with a strong position but only
+  low-to-moderate visibility — pages that look "at risk" on paper but haven't started
+  declining yet.</p>
+
+  <h2><span class="num">5</span>Limitations &amp; Honest Framing</h2>
+  <ul>
+    <li><b>Proxy label, not ground truth.</b> <code>is_declining_label</code> reflects a
+    trend computed from two 90-day windows, not a verified cause of decline.</li>
+    <li><b>Directional, not causal.</b> This model estimates association with a declining
+    trend; it does not show that refreshing a flagged page <i>causes</i> a recovery. That
+    would require a pre/post or holdout experiment.</li>
+    <li><b>Small client pool.</b> 32 clients total (24 train / 8 test) is a thin base for a
+    client-holdout evaluation; results should be treated as an early signal, not a settled
+    number, until validated on the full warehouse.</li>
+    <li><b>Per-client concentration.</b> Both the baseline and the model over-represent 2–4
+    clients at the top of the queue — a real deployment needs a fairness/quota constraint,
+    not just a raw score sort.</li>
+    <li><b>Complexity didn't help here.</b> Random Forest underperformed the simpler linear
+    model on this feature set and sample size — reported as a genuine finding, not tuned away.</li>
+  </ul>
+
+  <h2><span class="num">6</span>Ranked Recommendations</h2>
+  <ol>
+    <li><b>Adopt the Logistic Regression queue as the refresh worklist, reviewed by a human</b>
+    before any page is touched — it roughly doubles the baseline's hit rate on a fair
+    evaluation.</li>
+    <li><b>Cap how many pages any single client contributes to the top of the queue.</b>
+    Without a per-client quota, editors serving many clients will keep re-refreshing the same
+    few accounts.</li>
+    <li><b>Work the tiers in order</b> — <code>refresh_priority</code> this sprint,
+    <code>refresh_backlog</code> next sprint, skip <code>no_action</code>.</li>
+    <li><b>Re-validate quarterly</b> — search behavior and competitive tiers shift; refit
+    rather than assume stability.</li>
+    <li><b>Never quote Precision@K without stating the split type</b> — given the gap in §4,
+    numbers from this dataset aren't comparable without that context.</li>
+  </ol>
+
+  <h2><span class="num">7</span>Reproducibility</h2>
+  <div class="repro-list">
+    <p>Python 3.12, <code>scikit-learn==1.8.0</code>, <code>pandas==3.0.2</code>,
+    <code>numpy==2.4.4</code>. Seed <code>42</code> used for every split and stochastic model.</p>
+    <pre><code>pip install -r requirements.txt
+jupyter nbconvert --to notebook --execute work/notebooks/w04_baseline_score.ipynb
+jupyter nbconvert --to notebook --execute work/notebooks/w05_model.ipynb
+jupyter nbconvert --to notebook --execute work/notebooks/w06_validation_audit.ipynb
+jupyter nbconvert --to notebook --execute work/notebooks/w07_action_playbook.ipynb</code></pre>
+    <p>Notebooks: <a href="https://github.com/fawadwazir/flyrank-Internship/tree/main/work/notebooks">work/notebooks/</a>
+    &middot; Full write-up: <a href="https://github.com/fawadwazir/flyrank-Internship/blob/main/work/capstone_report.md">work/capstone_report.md</a>
+    &middot; Repo root: <a href="https://github.com/fawadwazir/flyrank-Internship">flyrank-Internship</a></p>
+  </div>
+
+  <footer>
+    <div class="credit-box">
+      <span>Built on the <b>FlyRank ML Internship dataset</b>.</span>
+      <a href="https://flyrank.ai" target="_blank" rel="noopener">flyrank.ai →</a>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
